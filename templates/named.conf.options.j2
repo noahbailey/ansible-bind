@@ -1,0 +1,35 @@
+acl "trusted" {
+{% for i in bind.trusted_subnets %}
+	{{ i }}; 
+{% endfor %}
+	localhost;
+};
+
+options {
+	directory "/var/cache/bind";
+
+	forwarders {
+{% for i in bind.forwarders %}
+		{{ i }}; 
+{% endfor %}
+	};
+
+	dnssec-validation auto;
+
+	auth-nxdomain no;    # conform to RFC1035
+	listen-on-v6 { any; };
+	listen-on { any; };
+
+	allow-recursion { trusted; };
+	allow-query-cache { trusted; };
+
+{% if bind.secondary_servers is defined %}
+	allow-transfer { 
+{% for i in bind.secondary_servers %}
+		{{ i }}; 
+{% endfor %}
+	}; 
+{% else %}
+	allow-transfer { none; };
+{% endif %}
+};

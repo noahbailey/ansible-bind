@@ -1,0 +1,11 @@
+- name: bind_reload
+  service: 
+    enabled: true
+    state: reloaded 
+    name: bind9
+
+- name: bind_restart
+  service: 
+    enabled: true
+    state: restarted
+    name: bind9

@@ -1,0 +1,10 @@
+//  Import the dynamic update key:
+include "/etc/bind/rndc.key";
+
+{% for zone in zones %}
+zone "{{ zone.name }}" {
+        type master;
+        file "/var/lib/bind/{{ zone.name }}.db" ;
+};
+
+{% endfor %}

@@ -1,0 +1,5 @@
+- name: "{{ zone.name }} :: Generate database file"
+  template: 
+    src: templates/zone.j2
+    dest: /var/lib/bind/{{ zone.name }}.db
+  notify: bind_reload

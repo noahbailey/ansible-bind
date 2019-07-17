@@ -1,0 +1,19 @@
+; Ansible 
+; Template 1.0.0
+
+$TTL	86400 ;
+$ORIGIN {{ zone.name }}.
+
+@  1D  IN  SOA {{ zone.primary_ns }}. hostmaster.{{ zone.name }}. (
+			      {{ ansible_date_time.epoch }} ; serial
+			      3H ; refresh
+			      15 ; retry
+			      1w ; expire
+			      3h ; nxdomain ttl
+        )
+
+@   IN  NS  {{ zone.primary_ns }}.
+
+{% for record in zone.records %}
+{{ record }}
+{% endfor %}
