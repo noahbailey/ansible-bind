@@ -5,7 +5,7 @@ $TTL	86400 ;
 $ORIGIN {{ zone.name }}.
 
 @  1D  IN  SOA {{ zone.primary_ns }}. hostmaster.{{ zone.name }}. (
-			      {{ ansible_date_time.epoch }} ; serial
+			      20190708 ; serial
 			      3H ; refresh
 			      15 ; retry
 			      1w ; expire
