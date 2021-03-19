@@ -1,17 +1,18 @@
-- name: named.conf.local 
-  template: 
+---
+- name: named.conf.local
+  template:
     src: templates/named.conf.local.j2
     dest: /etc/bind/named.conf.local
   notify: bind_restart
 
 - name: name.conf.options
-  template: 
+  template:
     src: templates/named.conf.options.j2
-    dest: /etc/bind/named.conf.options 
+    dest: /etc/bind/named.conf.options
   notify: bind_restart
 
 - name: zone file directory
-  file: 
+  file:
     state: directory
     path: /var/lib/bind
     owner: bind
